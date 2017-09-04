@@ -24,7 +24,17 @@ Route::get('/'              , 'HomeController@show')  ->name('home');
 // Route::get('user/{user}'    , 'UserController@show')        ->name('users.show');
 // Route::resource('contacts'  , 'ContactController',  ['only' => ['index', 'store']]);
 // Route::resource('questions' , 'QuestionController', ['only' => ['index', 'show', 'store']]);
-// // ログイン状態の'admin'ユーザーのみアクセス可能
-// Route::group(['middleware' => ['auth', 'can:admin'], 'namespace' => 'Admin'], function () {
-//     Route::resource('admin/questions', 'QuestionController');
-// });
+// // ログイン状態の'master'ユーザーのみアクセス可能
+Route::group(['middleware' => ['auth', 'can:master'] ], function ()
+{
+    Route::get('control'              , 'MasterController@show')  ->name('control');
+    Route::resource('control/questions', 'QuestionController');
+    //ユーザの権限編集ができる
+    Route::group(['middleware' => ['auth', 'can:owner'] ], function ()
+    {
+    });
+});
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
