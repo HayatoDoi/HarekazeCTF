@@ -29,17 +29,15 @@ Route::group(['middleware' => ['auth', 'can:master'] ], function ()
 {
     Route::get('control'              , 'MasterController@show')  ->name('control');
     Route::resource('control/questions', 'QuestionController');
-    
-    //問題追加フォーム
-    // Route::get('control/questions/create', 'QuestionController@showCreateForm');
-    // Route::post('control/questions/create', 'QuestionController@saveCreateForm');
 
     //ユーザの権限編集ができる
     Route::group(['middleware' => ['auth', 'can:owner'] ], function ()
     {
+        Route::get('control/user'              , 'UserController@index');
+        Route::put('control/user/update/{id}', 'UserController@update');
     });
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
