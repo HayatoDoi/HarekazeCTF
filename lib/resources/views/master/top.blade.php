@@ -8,7 +8,7 @@
 </header>
 <div class="container">
 <ul class="list-unstyled">
-<li><a href="{{ action('MasterController@show') }}">問題削除・編集</a></li>
+<li><a href="{{ action('QuestionController@index') }}">問題削除・編集</a></li>
 <li><a href="{{ action('MasterController@show') }}">ユーザ管理</a></li>
 </ul>
 </div>

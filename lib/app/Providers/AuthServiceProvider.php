@@ -30,12 +30,12 @@ class AuthServiceProvider extends ServiceProvider
         //type=2 Guest
         Gate::define('owner', function ($user)
         {
-            return ($user->type == 0);
+            return ($user->type === 0 );
         });
 
         Gate::define('master', function ($user)
         {
-            return ($user->type == 1);
+            return ($user->type === 1 || $user->type === 0);
         });
 
         //
