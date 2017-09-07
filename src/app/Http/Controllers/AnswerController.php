@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Models\Questions;
+use App\Http\Models\Scores;
+use Auth;
 
 class AnswerController extends Controller
 {
@@ -15,5 +17,37 @@ class AnswerController extends Controller
         ([
             'questions'=>$questions,
         ]);
+    }
+    public function showAnswerForm($qId)
+    {
+        $question = Questions::find($qId);
+        // var_dump($question);
+        return view('answer.answerForm')->with
+        ([
+            'question'=>$question,
+        ]);
+    }
+    
+    public function answer($qId, Request $request)
+    {
+        $question = Questions::find($qId);
+        $isCorrect = false;
+        if( $question->flag === $request->aFlag )
+        {
+            $isCorrect = true;
+        }
+
+        $score = new Scores;
+        $score->user_id = Auth::user()->id;
+        $score->question_id = $qId;
+        $score->flag = $request->aFlag;
+        $score->save();
+
+        return view('answer.answerForm')->with
+        ([
+            'question'=>$question,
+            'isCorrect'=>$isCorrect,
+        ]);
+
     }
 }

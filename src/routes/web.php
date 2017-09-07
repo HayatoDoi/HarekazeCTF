@@ -18,6 +18,8 @@
 // Auth::routes();
 Route::get('/'              , 'HomeController@show')  ->name('home');
 Route::get('questions'              , 'AnswerController@index');
+Route::get('questions/{id}'              , 'AnswerController@showAnswerForm');
+Route::post('questions/{id}'              , 'AnswerController@answer');
 // Route::get('ranking'        , 'UserController@ranking')     ->name('ranking');
 
 // // ログイン状態の'master'ユーザーのみアクセス可能

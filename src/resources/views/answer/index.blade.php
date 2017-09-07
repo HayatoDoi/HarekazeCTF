@@ -20,7 +20,7 @@
   <tbody>
     @foreach ($questions as $question)
       <tr>
-        <th><a href="#">{{ $question->name }}</a></th>
+        <th><a href="{{ action('AnswerController@showAnswerForm', $question->id) }}">{{ $question->name }}</a></th>
         <td scope="row">{{ $question->score }}</td>
         <td>{{ $question->author_name }}</td>
       </tr>
