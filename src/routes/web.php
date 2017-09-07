@@ -20,7 +20,7 @@ Route::get('/'              , 'HomeController@show')  ->name('home');
 Route::get('questions'              , 'AnswerController@index');
 Route::get('questions/{id}'              , 'AnswerController@showAnswerForm');
 Route::post('questions/{id}'              , 'AnswerController@answer');
-// Route::get('ranking'        , 'UserController@ranking')     ->name('ranking');
+Route::get('ranking'        , 'RankingController@index');
 
 // // ログイン状態の'master'ユーザーのみアクセス可能
 Route::group(['middleware' => ['auth', 'can:master'] ], function ()
