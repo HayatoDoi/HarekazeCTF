@@ -11,12 +11,13 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Auth::routes();
 
-// Auth::routes();
-Route::get('/'              , 'HomeController@show')  ->name('home');
+Route::group(array('before' => 'auth'), function(){
+    Route::get('/'              , 'HomeController@show');
+    // ...
+});
+
 Route::get('questions'              , 'AnswerController@index');
 Route::get('questions/{id}'              , 'AnswerController@showAnswerForm');
 Route::post('questions/{id}'              , 'AnswerController@answer');
@@ -35,7 +36,3 @@ Route::group(['middleware' => ['auth', 'can:master'] ], function ()
         Route::put('control/user/update/{id}', 'UserController@update');
     });
 });
-
-Auth::routes();
-
-// Route::get('/home', 'HomeController@index')->name('home');
