@@ -43,20 +43,20 @@
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item active">
-                <a class="nav-link" href="/"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
+                <a class="nav-link" href="{{ action('TopController@index') }}"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/questions"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</a>
+                <a class="nav-link" href="{{ action('AnswerController@index') }}"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</a>
               </li>
               <li class="nav-item ">
-                <a class="nav-link" href="/ranking"><i class="fa fa-table" aria-hidden="true"></i> Ranking</a>
+                <a class="nav-link" href="{{ action('RankingController@index') }}"><i class="fa fa-table" aria-hidden="true"></i> Ranking</a>
               </li>
-              <li class="nav-item ">
+              {{--  <li class="nav-item ">
                 <a class="nav-link" href="/contact"><i class="fa fa-address-card-o" aria-hidden="true"></i> Contact</a>
-              </li>
+              </li>  --}}
               <!--start Admin only  -->
               <li class="nav-item ">
-                <a class="nav-link" href="/control"><i class="fa fa-cogs" aria-hidden="true"></i> Control</a>
+                <a class="nav-link" href="{{ action('MasterController@show') }}"><i class="fa fa-cogs" aria-hidden="true"></i> Control</a>
               </li>
               <!--end Admin only  -->
             </ul>
