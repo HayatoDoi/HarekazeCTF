@@ -23,10 +23,10 @@
 
         <title>HarekazeCTF</title>
         <link rel="icon" href="{{ asset('img/favicon.png') }}">
-        <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
         <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
         {{--  end meta  --}}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 
         <!-- Fonts -->
 
@@ -55,10 +55,33 @@
                 <a class="nav-link" href="/contact"><i class="fa fa-address-card-o" aria-hidden="true"></i> Contact</a>
               </li>  --}}
               <!--start Admin only  -->
+              @if ( !(Auth::guest()) && Auth::user()->type < 2  ) 
               <li class="nav-item ">
                 <a class="nav-link" href="{{ action('MasterController@show') }}"><i class="fa fa-cogs" aria-hidden="true"></i> Control</a>
               </li>
+              @endif
               <!--end Admin only  -->
+              <li class="nav-item dropdown">
+                @if (Auth::guest())
+                  <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Login
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="Login">
+                    <a class="dropdown-item" href="{{ route('login') }}">Login</a>
+                    <a class="dropdown-item" href="{{ route('register') }}">Register</a>
+                  </div>
+                @else
+                  <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{ Auth::user()->name }}
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="user_name">
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                      {{ csrf_field() }}
+                      <input type="button" class="button dropdown-item" value="Logout" onClick="submit(this.form);">
+                    </form>
+                  </div>
+                @endif
+              </li>
             </ul>
           </div>
         </nav>
@@ -70,8 +93,12 @@
         <a href="/"><span>&copy; 2016-2017 Harekaze</span></a>
       </footer>
 
-      <script src="{{ asset('js/jquery-3.1.1.slim.min.js') }}"></script>
+      {{--  <script src="{{ asset('js/jquery-3.1.1.slim.min.js') }}"></script>
       <script src="{{ asset('js/tether.js') }}"></script>
-      <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+      <script src="{{ asset('js/bootstrap.min.js') }}"></script>  --}}
+
+      <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
     </body>
 </html>
