@@ -17,13 +17,9 @@
 
 // Auth::routes();
 Route::get('/'              , 'HomeController@show')  ->name('home');
-// Route::get('rule'           , 'HomeController@rule')  ->name('rule');
-// Route::get('help'           , 'HomeController@help')  ->name('help');
-// Route::get('about'          , 'HomeController@about') ->name('about');
+Route::get('questions'              , 'AnswerController@index');
 // Route::get('ranking'        , 'UserController@ranking')     ->name('ranking');
-// Route::get('user/{user}'    , 'UserController@show')        ->name('users.show');
-// Route::resource('contacts'  , 'ContactController',  ['only' => ['index', 'store']]);
-// Route::resource('questions' , 'QuestionController', ['only' => ['index', 'show', 'store']]);
+
 // // ログイン状態の'master'ユーザーのみアクセス可能
 Route::group(['middleware' => ['auth', 'can:master'] ], function ()
 {
