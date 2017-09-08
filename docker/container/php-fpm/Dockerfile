@@ -19,8 +19,10 @@ RUN apt-get update && \
 RUN php -r "readfile('https://getcomposer.org/installer');" | php \
 	&& mv composer.phar /usr/local/bin/composer
 
-RUN cd /var/www/html && composer install
+# RUN cd /var/www/html && composer install
 
-RUN cd /var/www/html && php artisan key:generate
+WORKDIR /var/www/html/
 
-RUN cd /var/www/html && php artisan migrate
+RUN php artisan key:generate
+
+RUN php artisan migrate

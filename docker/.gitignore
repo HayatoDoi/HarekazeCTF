@@ -1,2 +1,2 @@
-/public
-/container/mysql
+/container/mysql/volume/*
+!/container/mysql/volume/.gitkeep

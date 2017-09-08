@@ -1,6 +1,6 @@
 version: "3.0"
 services:
-
+  # Middleware
   nginx:
     build: "./container/nginx"
     ports:
@@ -11,10 +11,11 @@ services:
       - "php-fpm"
     container_name: "harekazectf_nginx"
 
+  # Application
   php-fpm:
     build: "./container/php-fpm"
     volumes:
-      - "../src:/var/www/html"
+      - "../src:/var/www/html/"
     links:
       - "mysql"
     environment:
@@ -23,11 +24,20 @@ services:
       DATABASE_PASSWORD: 'root' # Mysql Password
       PATH: '$PATH:/root/.composer/vendor/bin'
     container_name: "harekazectf_php-fpm"
-  
+
+  composer:
+    image: "composer/composer"
+    volumes:
+      - "../src:/app"
+    command: ["install --ignore-platform-reqs", "dump-autoload --optimize"]
+    container_name: "harekazectf_composer"
+    
+  # Database
   mysql:
     image: "mysql"
     volumes:
       - "./container/mysql:/var/lib/mysql"
+      - "./container/mysql/init:/docker-entrypoint-initdb.d"
     environment:
       - "MYSQL_ROOT_PASSWORD=root" # Mysql Password
     container_name: "harekazectf_mysql"

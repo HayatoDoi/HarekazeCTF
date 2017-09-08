@@ -36,7 +36,7 @@ cd HarekazeCTF/src
 - 設定ファイルを作成します
 ```bash
 cp .env.example .env && \
-sed .env -i -e 's/DB_DATABASE=homestead/DB_DATABASE=kitsectf/g' \
+sed .env -i -e 's/DB_DATABASE=homestead/DB_DATABASE=HarekazeCTF/g' \
 -e 's/DB_USERNAME=homestead/DB_USERNAME=root/g' \
 -e 's/DB_PASSWORD=secret/DB_PASSWORD=root/g'
 ```
