@@ -26,10 +26,10 @@ services:
     container_name: "harekazectf_php-fpm"
 
   composer:
-    image: "composer/composer"
+    image: "composer"
     volumes:
       - "../src:/app"
-    command: ["install --ignore-platform-reqs", "dump-autoload --optimize"]
+    command: ["install"]
     container_name: "harekazectf_composer"
     
   # Database
@@ -46,7 +46,7 @@ services:
     image: "phpmyadmin/phpmyadmin"
     environment:
       - "PMA_ARBITRARY=1"
-      - "PMA_HOST=harekazectf_mysql"
+      - "PMA_HOST=mysql"
       - "PMA_USER=root"
       - "PMA_PASSWORD=root" # Mysql Password
     links:
