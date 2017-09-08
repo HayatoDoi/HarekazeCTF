@@ -30,32 +30,50 @@ git clone https://github.com/HayatoDoi/HarekazeCTF.git
 
 - フォルダを移動します
 ```bash
-cd HarekazeCTF/src
+cd HarekazeCTF/docker
 ```
 
-- 設定ファイルを作成します
+- 設定ファイルをコピーし、パスワードを変更します。(変更しなくても動きますが、セキュアではないですよ。)
 ```bash
-cp .env.example .env && \
-sed .env -i -e 's/DB_DATABASE=homestead/DB_DATABASE=HarekazeCTF/g' \
--e 's/DB_USERNAME=homestead/DB_USERNAME=root/g' \
--e 's/DB_PASSWORD=secret/DB_PASSWORD=root/g'
+cp .env.example .env
+vim .env
 ```
 
-- フォルダを移動します
+- composerコンテナを起動して、ライブラリをインストールします
+```
+docker-compose up -d harekazectf_composer
+```
+
+- 権限を変更します。(まじセキュアじゃない…)
 ```bash
-cd ../docker
+sudo chmod -R 777 ../src
 ```
 
-- dockerを起動します
-```
+- すぺてのサービスを立ち上げます。
+```bash
 docker-compose up
 ```
 
-#### Mysql Password
-- user : root
-- password : root
+おわり。
 
-めっちゃ適当につけてるから、本番環境にするときは変えてね。  
+#### デフォルトパスワード
+変更したい場合は、`HarekazeCTF/docker/.env`を編集して、再起動してください。
+
+mysql
+```
+rootユーザ名 : root
+パスワード : root
+
+一般ユーザ名 : user
+パスワード : user
+```
+
+PhpMyAdmin
+```
+サーバ : mysql
+ユーザ名 : user
+パスワード : user
+```
 
 #### Licence
 
