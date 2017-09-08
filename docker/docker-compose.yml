@@ -47,9 +47,9 @@ services:
     image: "mysql"
     volumes:
       - "./container/mysql/volume:/var/lib/mysql"
-    environment:
-      - 'MYSQL_DATABASE=HarekazeCTF'
     env_file: ".env"
+    ports:
+       - "3306:3306"
     container_name: "harekazectf_mysql"
 
   phpmyadmin:

@@ -11,6 +11,4 @@ RUN apt-get update && \
 RUN docker-php-ext-install mysqli pdo_mysql xml
 
 WORKDIR /var/www/html/
-CMD php artisan key:generate
-CMD php artisan migrate
 CMD php /script/script.php
