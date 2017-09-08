@@ -1,0 +1,48 @@
+version: "3.0"
+services:
+
+  nginx:
+    build: "./container/nginx"
+    ports:
+      - "80:80"
+    volumes:
+      - "../src:/var/www/html"
+    links:
+      - "php-fpm"
+    container_name: "harekazectf_nginx"
+
+  php-fpm:
+    build: "./container/php-fpm"
+    volumes:
+      - "../src:/var/www/html"
+    links:
+      - "mysql"
+    environment:
+      DATABASE_HOST: 'harekazectf_mysql'
+      DATABASE_USER: 'root'
+      DATABASE_PASSWORD: 'root' # Mysql Password
+      PATH: '$PATH:/root/.composer/vendor/bin'
+    container_name: "harekazectf_php-fpm"
+  
+  mysql:
+    image: "mysql"
+    volumes:
+      - "./container/mysql:/var/lib/mysql"
+    environment:
+      - "MYSQL_ROOT_PASSWORD=root" # Mysql Password
+    container_name: "harekazectf_mysql"
+
+  phpmyadmin:
+    image: "phpmyadmin/phpmyadmin"
+    environment:
+      - "PMA_ARBITRARY=1"
+      - "PMA_HOST=harekazectf_mysql"
+      - "PMA_USER=root"
+      - "PMA_PASSWORD=root" # Mysql Password
+    links:
+      - "mysql"
+    ports:
+       - "8080:80"
+    volumes:
+       - "/sessions"
+    container_name: "harekazectf_phpmyadmin"
