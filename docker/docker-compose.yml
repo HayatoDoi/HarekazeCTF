@@ -19,11 +19,21 @@ services:
     links:
       - "mysql"
     environment:
-      DATABASE_HOST: 'harekazectf_mysql'
-      DATABASE_USER: 'root'
-      DATABASE_PASSWORD: 'root' # Mysql Password
-      PATH: '$PATH:/root/.composer/vendor/bin'
+      - "DATABASE_HOST=mysql"
+    env_file: ".env"
     container_name: "harekazectf_php-fpm"
+
+  php-artisan:
+    build: "./container/php-artisan"
+    volumes:
+      - "../src:/var/www/html/"
+      - "./container/php-artisan/script:/script"
+    links:
+      - "mysql"
+    environment:
+      - "DATABASE_HOST=mysql"
+    env_file: ".env"
+    container_name: "harekazectf_php-artisan"
 
   composer:
     image: "composer"
@@ -36,10 +46,10 @@ services:
   mysql:
     image: "mysql"
     volumes:
-      - "./container/mysql:/var/lib/mysql"
-      - "./container/mysql/init:/docker-entrypoint-initdb.d"
+      - "./container/mysql/volume:/var/lib/mysql"
     environment:
-      - "MYSQL_ROOT_PASSWORD=root" # Mysql Password
+      - 'MYSQL_DATABASE=HarekazeCTF'
+    env_file: ".env"
     container_name: "harekazectf_mysql"
 
   phpmyadmin:
@@ -47,8 +57,6 @@ services:
     environment:
       - "PMA_ARBITRARY=1"
       - "PMA_HOST=mysql"
-      - "PMA_USER=root"
-      - "PMA_PASSWORD=root" # Mysql Password
     links:
       - "mysql"
     ports:
