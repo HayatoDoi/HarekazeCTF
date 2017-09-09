@@ -25,7 +25,7 @@
     </div>
     <div class="form-group">
       <label for="qSentence">問題文</label>
-      <textarea class="form-control" name="qSentence" rows="8" value="{{ $qSentence }}"></textarea>
+      <textarea class="form-control" name="qSentence" rows="8" >{{ $qSentence }}</textarea>
     </div>
     <button type="submit" class="btn btn-primary">更新する</button>
   </form>
