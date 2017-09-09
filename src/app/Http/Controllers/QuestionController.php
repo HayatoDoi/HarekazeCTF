@@ -65,7 +65,6 @@ class QuestionController extends Controller
     public function edit($id)
     {
         $question = Questions::questionAddAuthorname($id)[0];
-        var_dump($question);
         return view('master.editQuestion')->with
         ([
             'qId'=>$question->id,
