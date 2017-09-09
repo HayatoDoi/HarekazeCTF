@@ -8,20 +8,29 @@
 </header>
 
 <div class="container">
-  <label>{{ $question->sentence }}</label>
-  <form action="{{ action('AnswerController@answer', $question->id) }}" method="POST">
+  <blockquote class="blockquote" >
+    <p class="mb-0">{{ $question->sentence }}</p>
+  </blockquote>
+</div>
+
+<div class="container">
+  @if( ( isset($isCorrect) && $isCorrect === true ) || ( isset($isAnswered) && $isAnswered === true ))
+    <p class="text-success">Correct answer</p>
+  @elseif( isset($isCorrect) )
+    <p class="text-danger">Incorrect answer</p>
+  @endif
+</div>
+
+<div class="container">
+  @if( isset($isAnswered) && $isAnswered === true )
+    <form class="form-inline" action="{{ action('AnswerController@answer', $question->id) }}" method="POST" onsubmit="return false;">
+  @else
+    <form class="form-inline" action="{{ action('AnswerController@answer', $question->id) }}" method="POST">
+  @endif
     {{ csrf_field() }}
     <div class="form-group">
-      <label for="aFlag">Flag</label>
-      <input type="text" class="form-control" name="aFlag" placeholder="HarekazeCTF{******************}" value="" >
+      <input type="text" class="form-control" name="aFlag" placeholder="HarekazeCTF{******************}">
     </div>
-    @if( isset($isCorrect) )
-      @if( $isCorrect === true )
-        <p>Correct answer</p>
-      @else
-        <p>Incorrect answer</p>
-      @endif
-    @endif
     <button type="submit" class="btn btn-primary">送信</button>
   </form>
 </div>

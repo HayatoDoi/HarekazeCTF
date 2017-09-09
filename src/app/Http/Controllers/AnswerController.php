@@ -20,10 +20,12 @@ class AnswerController extends Controller
     }
     public function showAnswerForm($qId)
     {
+        $isAnswered = Questions::isAnswered(Auth::user()->id, $qId);
         $question = Questions::find($qId);
         // var_dump($question);
         return view('answer.answerForm')->with
         ([
+            'isAnswered'=>$isAnswered,
             'question'=>$question,
         ]);
     }
