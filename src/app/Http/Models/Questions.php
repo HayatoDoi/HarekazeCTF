@@ -39,4 +39,15 @@ class Questions extends Model
         ->get();
         return $questions;
      }
+     public static function isAnswered($uId, $qId)
+     {
+        $r = DB::table('scores')
+        ->select('*')
+        ->leftJoin('questions', 'scores.question_id', '=','questions.id')
+        ->whereRaw('scores.flag = questions.flag')
+        ->whereRaw('scores.user_id = ' . $uId)
+        ->whereRaw('scores.question_id = ' . $qId)
+        ->get();
+        return ( count($r) === 0 ) ? false : true;
+     }
 }

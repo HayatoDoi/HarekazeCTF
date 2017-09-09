@@ -1,8 +1,8 @@
 @extends('layouts.master')
 @section('content')
-
-<section>
-
+<?php
+use App\Http\Models\Questions;
+?>
 <header class="section-header">
 <h2>問題一覧</h2>
 </header>
@@ -11,6 +11,7 @@
 <table class="table">
   <thead>
     <tr>
+      <th></th>
       <th>問題名</th>
       <th>得点</th>
       <th>作成者</th>
@@ -20,7 +21,8 @@
   <tbody>
     @foreach ($questions as $question)
       <tr>
-        <th><a href="{{ action('AnswerController@showAnswerForm', $question->id) }}">{{ $question->name }}</a></th>
+        <th scope="row">{{ Questions::isAnswered(Auth::user()->id, $question->id) ? '☆' : ' '}}</th>
+        <td><a href="{{ action('AnswerController@showAnswerForm', $question->id) }}">{{ $question->name }}</a></td>
         <td scope="row">{{ $question->score }}</td>
         <td>{{ $question->author_name }}</td>
       </tr>
