@@ -1,0 +1,3 @@
+/container/mysql/volume/*
+!/container/mysql/volume/.gitkeep
+/.env

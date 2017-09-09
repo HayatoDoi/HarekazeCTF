@@ -1,0 +1,66 @@
+version: "3.0"
+services:
+  # Middleware
+  nginx:
+    build: "./container/nginx"
+    ports:
+      - "80:80"
+    volumes:
+      - "../src:/var/www/html"
+    links:
+      - "php-fpm"
+    container_name: "harekazectf_nginx"
+
+  # Application
+  php-fpm:
+    build: "./container/php-fpm"
+    volumes:
+      - "../src:/var/www/html/"
+    links:
+      - "mysql"
+    environment:
+      - "DATABASE_HOST=mysql"
+    env_file: ".env"
+    container_name: "harekazectf_php-fpm"
+
+  php-artisan:
+    build: "./container/php-artisan"
+    volumes:
+      - "../src:/var/www/html/"
+      - "./container/php-artisan/script:/script"
+    links:
+      - "mysql"
+    environment:
+      - "DATABASE_HOST=mysql"
+    env_file: ".env"
+    container_name: "harekazectf_php-artisan"
+
+  composer:
+    image: "composer"
+    volumes:
+      - "../src:/app"
+    command: ["install"]
+    container_name: "harekazectf_composer"
+    
+  # Database
+  mysql:
+    image: "mysql"
+    volumes:
+      - "./container/mysql/volume:/var/lib/mysql"
+    env_file: ".env"
+    ports:
+       - "3306:3306"
+    container_name: "harekazectf_mysql"
+
+  phpmyadmin:
+    image: "phpmyadmin/phpmyadmin"
+    environment:
+      - "PMA_ARBITRARY=1"
+      - "PMA_HOST=mysql"
+    links:
+      - "mysql"
+    ports:
+       - "8080:80"
+    volumes:
+       - "/sessions"
+    container_name: "harekazectf_phpmyadmin"
