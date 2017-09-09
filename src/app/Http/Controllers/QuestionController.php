@@ -65,6 +65,12 @@ class QuestionController extends Controller
     public function edit($id)
     {
         $question = Questions::questionAddAuthorname($id)[0];
+        //権限チェック
+        if( !(Auth::user()->id === $question->author_id || Auth::user()->type === 0))
+        {
+            echo "権限がありません";
+            return;
+        }
         return view('master.editQuestion')->with
         ([
             'qId'=>$question->id,
