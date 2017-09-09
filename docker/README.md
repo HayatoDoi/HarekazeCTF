@@ -41,7 +41,7 @@ vim .env
 
 - composerコンテナを起動して、ライブラリをインストールします
 ```
-docker-compose up -d harekazectf_composer
+docker-compose up composer
 ```
 
 - 権限を変更します。(まじセキュアじゃない…)
