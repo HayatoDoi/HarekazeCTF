@@ -34,16 +34,19 @@ class AnswerController extends Controller
     {
         $question = Questions::find($qId);
         $isCorrect = false;
-        if( $question->flag === $request->aFlag )
+        if( $question->flag === $request->input('aFlag', '') )
         {
             $isCorrect = true;
         }
 
-        $score = new Scores;
-        $score->user_id = Auth::user()->id;
-        $score->question_id = $qId;
-        $score->flag = $request->aFlag;
-        $score->save();
+        if(!$request->input('aFlag', '') === '')
+        {
+            $score = new Scores;
+            $score->user_id = Auth::user()->id;
+            $score->question_id = $qId;
+            $score->flag = $request->aFlag;
+            $score->save();
+        }
 
         return view('answer.answerForm')->with
         ([
