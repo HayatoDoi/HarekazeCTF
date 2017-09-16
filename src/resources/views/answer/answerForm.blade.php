@@ -22,9 +22,9 @@
 
 <div class="container">
   @if( ( isset($isCorrect) && $isCorrect === true ) || ( isset($isAnswered) && $isAnswered === true ))
-    <p class="text-success">Correct answer</p>
+    <div class="alert alert-success" role="alert">Correct answer</div>
   @elseif( isset($isCorrect) )
-    <p class="text-danger">Incorrect answer</p>
+    <div class="alert alert-danger" role="alert">Incorrect answer</div>
   @endif
 </div>
 
