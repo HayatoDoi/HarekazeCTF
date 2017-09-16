@@ -8,9 +8,16 @@
 </header>
 
 <div class="container">
-  <blockquote class="blockquote" >
-    <p class="mb-0">{{ $question->sentence }}</p>
-  </blockquote>
+  <div class="tab-pane card">
+    <markdown id="markdown" hidden>
+      {{ $question->sentence }}
+    </markdown>
+    <div class="card-block">
+      <script>
+        document.write( marked( document.getElementById('markdown').innerHTML ) );
+      </script>
+    </div>
+  </div>
 </div>
 
 <div class="container">
