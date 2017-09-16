@@ -77,7 +77,7 @@ PhpMyAdmin
 
 #### Licence
 
-??????  
+These codes are licensed under the MIT.  
 
 #### Author
-???  
+[Isoroku@Harekaze](https://github.com/HayatoDoi/)

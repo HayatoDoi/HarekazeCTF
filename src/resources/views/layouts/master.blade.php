@@ -6,7 +6,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="Harekaze is a Japanese Capture The Flag (CTF) team.">
-        <meta name="author" content="Team:Harekaze">
+        <meta name="author" content="Isoroku@Harekaze">
         {{--  todo link change  --}}
         <link rel="canonical" href="https://harekaze.com">
         <meta property="og:type" content="website">
