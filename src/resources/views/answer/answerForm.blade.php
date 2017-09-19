@@ -9,9 +9,7 @@
 
 <div class="container">
   <div class="tab-pane card">
-    <markdown id="markdown" hidden>
-      {{ $question->sentence }}
-    </markdown>
+    <markdown id="markdown" hidden>{{ $question->sentence }}</markdown>
     <div class="card-block">
       <script>
         document.write( marked( document.getElementById('markdown').innerHTML ) );
