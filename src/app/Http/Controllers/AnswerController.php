@@ -39,7 +39,7 @@ class AnswerController extends Controller
             $isCorrect = true;
         }
 
-        if(!$request->input('aFlag', '') === '')
+        if(!($request->input('aFlag', '') === ''))
         {
             $score = new Scores;
             $score->user_id = Auth::user()->id;
