@@ -63,13 +63,22 @@
               <!--end Admin only  -->
               <li class="nav-item dropdown">
                 @if (Auth::guest())
-                  <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Login
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="Login">
-                    <a class="dropdown-item" href="{{ route('login') }}">Login</a>
-                    <a class="dropdown-item" href="{{ route('register') }}">Register</a>
-                  </div>
+                  @if (Request::url() === asset('login'))
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Register
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="Register">
+                      <a class="dropdown-item" href="{{ route('register') }}">Register</a>
+                    </div>
+                  @else
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Login
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="Login">
+                      <a class="dropdown-item" href="{{ route('login') }}">Login</a>
+                      <a class="dropdown-item" href="{{ route('register') }}">Register</a>
+                    </div>
+                  @endif
                 @else
                   <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     {{ Auth::user()->name }}
